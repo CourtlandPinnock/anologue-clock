@@ -83,17 +83,21 @@ function quartz() {
         // Rotate to desired degrees (current seconds * 6).
         secondHand.style.transform = `rotate(${secondDeg}deg)`;
         // Get current minutes in the hour and multiply by 6 because 360 deg / 60 minutes == 6 deg per minute.
-        let minuteDeg = time.getMinutes() * 6
+        let milli = time.getMilliseconds()
+        let currentSec = time.getSeconds() * 1000 + milli;
+        // console.log(currentSec);
+        let minuteDeg = time.getMinutes() * 60 * 1000 + currentSec;
         // Rotate to desired degrees (current minute * 6);
-        minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
-        // Get current hours - 12 beacause getHours returns in 24 hour format, multiply by 60. 
+        minuteHand.style.transform = `rotate(${minuteDeg * 0.0001}deg)`;
+        console.log( minuteDeg);
+        // Get current hours - 12 beacause getHours returns in 24 hour format, multiply by 60.
         let minutesMilli = time.getMinutes();
         // getHours returns 24 hour format, so - 12 gives us the 12 hour equiv. Mulitply by 60 = gives us the minute representation of that hour, only the hour.
         // Hence we add the minutes of within the current hour later to get the degrees.
         let hoursMilli = (time.getHours() - 12) * 60;
-        console.log(hoursMilli);
+        // console.log(hoursMilli);
         let hoursDegrees = (minutesMilli + hoursMilli) * 0.5;
-        console.log(hoursDegrees / 0.5);
+        // console.log(hoursDegrees / 0.5);
         // Rotate to desired deg based on time.
         hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
 
