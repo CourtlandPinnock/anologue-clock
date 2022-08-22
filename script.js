@@ -10,7 +10,7 @@ function selectMovement() {
     
     // Set default as quartz function.
     if (movement === "") {
-        //quartz();
+        quartz();
     }
     
     // If user clicks quartz button active quartz function.
